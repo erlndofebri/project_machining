@@ -1,0 +1,127 @@
+# Path related
+dataset_path: data/raw/machining_maintenance.csv
+dataset_cleaned_path: data/processed/machining_maintenance.pkl
+train_set_path:
+- data/processed/x_train.pkl
+- data/processed/y_train.pkl
+valid_set_path:
+- data/processed/x_valid.pkl
+- data/processed/y_valid.pkl
+test_set_path:
+- data/processed/x_test.pkl
+- data/processed/y_test.pkl
+train_feng_set_path:
+- data/processed/x_train_feng.pkl
+- data/processed/y_train_feng.pkl
+valid_feng_set_path:
+- data/processed/x_valid_feng.pkl
+- data/processed/y_valid_feng.pkl
+test_feng_set_path:
+- data/processed/x_test_feng.pkl
+- data/processed/y_test_feng.pkl
+production_model_path: model/best_model.pkl
+ohe_stasiun_path: model/encoder.pkl
+le_encoder_path: model/le_failure_type.pkl
+training_log_path: log/training_log.json
+
+# Debug related
+print_debug: true
+
+# missing values imputation
+#balance_imputation: 550
+#pdays_imputation: 0
+
+
+drop_list:
+- Product ID
+
+int64_columns:
+- Rotational speed [rpm]
+- Tool wear [min]
+float64_columns:
+- Air temperature [K]
+- Process temperature [K]
+- Torque [Nm]
+label: Failure Type
+label_Failure Type:
+- No Failure
+- Failure
+
+# map target feature
+mapping_target_feature : {
+    'Heat Dissipation Failure' : 'Failure',
+    'Power Failure' : 'Failure',
+    'Overstrain Failure' : 'Failure',
+    'Tool Wear Failure' : 'Failure',
+    'Random Failures' : 'Failure'}
+
+# Rename Features
+map_rename_features : [
+  'Type', 
+  'Air_temperature', 
+  'Process_temperature',
+  'Rotational_speed', 
+  'Torque', 
+  'Tool_wear',
+  'Failure_Type'
+]
+
+
+object_columns:
+- Product ID
+- Type
+- Failure Type
+
+
+predictors:
+- Type
+- Air temperature [K]
+- Process temperature [K]
+- Rotational speed [rpm]
+- Torque [Nm]
+- Tool wear [min]
+
+predictors_ohe:
+- Air temperature [K]
+- Process temperature [K]
+- Rotational speed [rpm]
+- Torque [Nm]
+- Tool wear [min]
+- Type_H
+- Type_L
+- Type_M
+
+
+range_Air temperature [K]:
+- 295.3
+- 304.5
+range_Process temperature [K]:
+- 305.7
+- 313.8
+range_Rotational speed [rpm]:
+- 1168.0
+- 2886.0
+range_Torque [Nm]:
+- 3.8
+- 76.6
+range_Tool wear [min]:
+- 0.0
+- 253.0
+range_Type:
+- M
+- L
+- H
+range_Failure Type:
+- No Failure
+- Failure
+
+# Splitting related
+test_size: 0.2
+valid_size: 0.5
+
+# Modeling related
+list_of_model_path: log/list_of_model.pkl
+list_of_param_path: log/list_of_param.pkl
+list_of_tuned_model_path: log/list_of_tuned_model.pkl
+best_model_path: model/best_model.pkl
+best_threshold_path: model/best_threshold.pkl
